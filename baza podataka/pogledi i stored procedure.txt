@@ -1,0 +1,22 @@
+POGLEDI: ______
+
+
+CREATE VIEW `IzdavanjePasosa`.`SviPodacioPodnosiocima` AS select `PODNOSILAC`.`JMBG`, `PODNOSILAC`.`Prezime`, `PODNOSILAC`.`Ime`, `PASOS`.`STATUS` as `StatusPasosa` from `IzdavanjePasosa`.`PODNOSILAC` INNER JOIN `IzdavanjePasosa`.`PASOS` ON `IzdavanjePasosa`.`PODNOSILAC`.`SifraPasosa`=`IzdavanjePasosa`.`Pasos`.`Sifra`;
+
+
+
+CREATE VIEW `IzdavanjePasosa`.`SviPodacioPodnosiocimaSaSlikom` AS select `PODNOSILAC`.`JMBG`, `PODNOSILAC`.`Prezime`, `PODNOSILAC`.`Ime`, `PASOS`.`Status` as `StatusPasosa`, `PODNOSILAC`.`NazivFajlaFotografije`   from `IzdavanjePasosa`.`PODNOSILAC` INNER JOIN `IzdavanjePasosa`.`PASOS` ON `IzdavanjePasosa`.`PODNOSILAC`.`SifraPasosa`=`IzdavanjePasosa`.`PASOS`.`Sifra`;
+
+
+STORED PROCEDURA:_____
+
+USE `IzdavanjePasosa`;
+DROP procedure IF EXISTS `DodajPodnosioca`;
+DELIMITER $$
+USE `IzdavanjePasosa`$$
+CREATE PROCEDURE `DodajPodnosioca` (IN JMBGParametar varchar(10), IN PrezimeParametar varchar(50), IN ImeParametar varchar(50), IN SifraPasosaParametar char(2), IN NazivFajlaFotografijeParametar varchar(100))
+BEGIN
+INSERT INTO `PODNOSILAC` (`JMBG`, `Prezime`, `Ime`, `SifraPasosa`, `NazivFajlaFotografije`) VALUES (JMBGParametar, PrezimeParametar, ImeParametar,SifraPasosaParametar, NazivFajlaFotografijeParametar);
+END
+$$
+DELIMITER ;
